@@ -25,14 +25,10 @@ Features
 
 Press `;;` in insert mode to auto-close the line and start a new line below.
 
-It works in normal mode but does not add a new line.
-
-Does not add semicolon after `}`.
-
-Preserve space padding.
-
-Will not double add semicolon.
-
+* Does not add semicolon after `}`.
+* Preserve space padding.
+* Will not double add semicolon.
+* Normal mode option (no newline)
 
 Examples
 
@@ -66,40 +62,39 @@ Below are all the options and their defaults
 
 * Which pairs to handle (NOT IMPLEMENTED,ONLY USE DEFAULT)
 
-    let g:SemicolonMagicPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+        let g:SemicolonMagicPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 * Add semicolon to end of line
 
-    let g:SemicolonMagicAddSemicolon = 1
+        let g:SemicolonMagicAddSemicolon = 1
 
 * Handle triple quotes
 
-    let g:SemicolonMagicTripleQuotes = 1
+        let g:SemicolonMagicTripleQuotes = 1
 
 * Change the insert mode mapping
 
-    let g:SemicolonMagicInsertMap = ';;'
+        let g:SemicolonMagicInsertMap = ';;'
 
 * Change the normal mode map
 
-    let g:SemicolonMagicNormalMap = ''
+        let g:SemicolonMagicNormalMap = ''
 
-    Use ;; and 'rhysd/clever-f.vim' to not clash
+        Use ;; and 'rhysd/clever-f.vim' to not clash
 
-    let g:SemicolonMagicNormalMap = ';;'
+        let g:SemicolonMagicNormalMap = ';;'
 
 * Enable/Disable
 
-  let g:SemicolonMagicEnabled = 1
+        let g:SemicolonMagicEnabled = 1
 
 * Turn on debug messages
 
-    let g:SemicolonMagicDebug = 0
+        let g:SemicolonMagicDebug = 0
 
 
-Buffer Level Setting
---------------------
-
+Buffer Settings
+---------------
 
 * Language based semicolon
 
@@ -126,6 +121,6 @@ The defaults (if you often use ; as a line terminator) then for each non-; langu
 Otherwise enable for each filetype
 
     let g:SemicolonMagicAddSemicolon = 0
-    autocmd Filetype FILETYPE let b:SemicolonmagicAddSemicolon = 0
+    autocmd Filetype FILETYPE let b:SemicolonmagicAddSemicolon = 1
 
 
