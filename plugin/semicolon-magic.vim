@@ -27,7 +27,7 @@ end
 
 " Insert-mode mapping
 if !exists('g:SemicolonMagicInsertModeNewline')
-  let g:SemicolonMagicInsertNewline = 1
+  let g:SemicolonMagicInsertModeNewline = 1
 end
 
 " Normal-mode mapping
