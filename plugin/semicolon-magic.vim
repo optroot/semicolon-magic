@@ -48,36 +48,48 @@ function! SemicolonMagic()
   let skipsc = !b:SemicolonMagicAddSemicolon
 
   let origline = getline('.')
-  echom 'Original line              : '.origline
+  if g:SemicolonMagicDebug
+    echom 'Original line              : '.origline
+  endif
 
   " Remove trailing whitespace/semicolons
   let origline = substitute(origline, '\s*;*\s*$', '' ,'')
   " Remove pipe character
   let origline = substitute(origline, '|', '' ,'')
   let line = origline
-  echom 'Preprocessed Line          : '.line
+  if g:SemicolonMagicDebug
+    echom 'Preprocessed Line          : '.line
+  endif
 
   " Remove escaped characters
   let line = substitute(line, '\v\\.','','g')
-  echom 'Removed escape characters  : '.line
+  if g:SemicolonMagicDebug
+    echom 'Removed escape characters  : '.line
+  endif
 
   " Remove qualified triplets
   let line = substitute(line,'\v""".{-}"""','','g')
   let line = substitute(line,'\v''''''.{-}''''''','','g')
   let line = substitute(line,'\v```.{-}```','','g')
-  echom 'Removed qualified triplets : '.line
+  if g:SemicolonMagicDebug
+    echom 'Removed qualified triplets : '.line
+  endif
 
   " Remove qualified strings
   let line = substitute(line,'\v".{-}"','','g')
   let line = substitute(line,'\v''.{-}''','','g')
   let line = substitute(line,'\v`.{-}`','','g')
-  echom 'Removed !=0 quoted strings : '.line
+  if g:SemicolonMagicDebug
+    echom 'Removed !=0 quoted strings : '.line
+  endif
 
   " Remove qualified empty strings (except triplets)
   "let line = substitute(line,'\v([^"])""([^"])','\1\2','g')
   "let line = substitute(line,'\v([^''])''''([^''])','\1\2','g')
   "let line = substitute(line,'\v([^`])``([^`])','\1\2','g')
-  echom 'Removed qualified          : '.line
+  if g:SemicolonMagicDebug
+    echom 'Removed qualified          : '.line
+  endif
 
   " Actually parse the syntax
   let newline = ''
@@ -87,13 +99,17 @@ function! SemicolonMagic()
     let line = substitute(line,'\v\[[^\(\)\[\]\{\}]*\]','','g')
     let line = substitute(line,'\v\{[^\(\)\[\]\{\}]*\}','','g')
   endwhile
-  echom 'Parsed                     : '.line
+  if g:SemicolonMagicDebug
+    echom 'Parsed                     : '.line
+  endif
 
   " Leave only open tags (and remove whitespace not between tags)
   let line = substitute(line,'\v([^\(\[\{"''`])\s*','\1','g')
   let line = substitute(line,'\v[^\(\[\{"''` ]*','','g')
   let line = substitute(line,'\v^\s*','','')
-  echom 'Open Tags Only             : '.line
+  if g:SemicolonMagicDebug
+    echom 'Open Tags Only             : '.line
+  endif
 
   " There can be at most one of each
   " Find the first occurrence
@@ -101,7 +117,9 @@ function! SemicolonMagic()
   if v > 0
     let line = strpart(line, 0, v)
   endif
-  echom 'Parsed Open String         : '.line
+  if g:SemicolonMagicDebug
+    echom 'Parsed Open String         : '.line
+  endif
 
   let chars = split(line,'\zs')
   let skipsc = skipsc || (len(chars)>0 && get(chars,0)=='{')
@@ -115,16 +133,22 @@ function! SemicolonMagic()
       let s .= char
     endif
   endfor
-  echom 'Proposed Close String      : '.s
+  if g:SemicolonMagicDebug
+    echom 'Proposed Close String      : '.s
+  endif
 
   let skipsc = skipsc || (origline[-1:]=='}')
 
   " Add a semicolon if the last char isn't }
   if skipsc
-    echom 'Skipping Semicolon'
+    if g:SemicolonMagicDebug
+      echom 'Skipping Semicolon'
+    endif
     call setline('.', substitute(origline.s, ';*\s*$', '', ''))
   else
-    echom 'Adding Semicolon'
+    if g:SemicolonMagicDebug
+      echom 'Adding Semicolon'
+    endif
     call setline('.', substitute(origline.s, ';*\s*$', ';', ''))
   endif
 
