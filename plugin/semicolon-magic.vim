@@ -25,6 +25,11 @@ if !exists('g:SemicolonMagicInsertMap')
   let g:SemicolonMagicInsertMap = ';;'
 end
 
+" Insert-mode mapping
+if !exists('g:SemicolonMagicInsertModeNewline')
+  let g:SemicolonMagicInsertNewline = 1
+end
+
 " Normal-mode mapping
 if !exists('g:SemicolonMagicNormalMap')
   let g:SemicolonMagicNormalMap = ''
@@ -189,9 +194,17 @@ function! SemicolonMagicInit()
   " Load the key mappings
   if g:SemicolonMagicInsertMap != ''
     if g:SemicolonMagicDebug
-      execute 'inoremap <buffer> '.g:SemicolonMagicInsertMap. ' <ESC>:call SemicolonMagic()<CR>o'
+      if g:SemicolonMagicInsertNewline
+        execute 'inoremap <buffer> '.g:SemicolonMagicInsertMap. ' <ESC>:call SemicolonMagic()<CR>o'
+      else
+        execute 'inoremap <buffer> '.g:SemicolonMagicInsertMap. ' <ESC>:call SemicolonMagic()<CR>A'
+      endif
     else
-      execute 'inoremap <buffer> <silent> '.g:SemicolonMagicInsertMap. ' <ESC>:silent! call SemicolonMagic()<CR>o'
+      if g:SemicolonMagicInsertNewline
+        execute 'inoremap <buffer> <silent> '.g:SemicolonMagicInsertMap. ' <ESC>:silent! call SemicolonMagic()<CR>o'
+      else
+        execute 'inoremap <buffer> <silent> '.g:SemicolonMagicInsertMap. ' <ESC>:silent! call SemicolonMagic()<CR>A'
+      endif
     endif
   endif
 

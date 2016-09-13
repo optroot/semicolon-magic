@@ -76,6 +76,10 @@ Below are all the options and their defaults
 
         let g:SemicolonMagicInsertMap = ';;'
 
+* Change the newline behavior in insert mode
+
+        let g:SemicolonMagicInsertNewline = 1
+
 * Change the normal mode map
 
         let g:SemicolonMagicNormalMap = ''
