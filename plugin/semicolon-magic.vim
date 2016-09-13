@@ -54,8 +54,6 @@ function! SemicolonMagic()
 
   " Remove trailing whitespace/semicolons
   let origline = substitute(origline, '\s*;*\s*$', '' ,'')
-  " Remove pipe character
-  let origline = substitute(origline, '|', '' ,'')
   let line = origline
   if g:SemicolonMagicDebug
     echom 'Preprocessed Line          : '.line
