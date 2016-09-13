@@ -194,13 +194,13 @@ function! SemicolonMagicInit()
   " Load the key mappings
   if g:SemicolonMagicInsertMap != ''
     if g:SemicolonMagicDebug
-      if g:SemicolonMagicInsertNewline
+      if g:SemicolonMagicInsertModeNewline
         execute 'inoremap <buffer> '.g:SemicolonMagicInsertMap. ' <ESC>:call SemicolonMagic()<CR>o'
       else
         execute 'inoremap <buffer> '.g:SemicolonMagicInsertMap. ' <ESC>:call SemicolonMagic()<CR>A'
       endif
     else
-      if g:SemicolonMagicInsertNewline
+      if g:SemicolonMagicInsertModeNewline
         execute 'inoremap <buffer> <silent> '.g:SemicolonMagicInsertMap. ' <ESC>:silent! call SemicolonMagic()<CR>o'
       else
         execute 'inoremap <buffer> <silent> '.g:SemicolonMagicInsertMap. ' <ESC>:silent! call SemicolonMagic()<CR>A'
