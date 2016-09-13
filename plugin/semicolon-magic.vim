@@ -199,9 +199,11 @@ function! SemicolonMagicInit()
 
   if g:SemicolonMagicNormalMap != ''
     if g:SemicolonMagicDebug
-      execute 'nnoremap <buffer>  '.g:SemicolonMagicNormalMap. ' <ESC>:call SemicolonMagic()<CR>'
+      execute 'nnoremap <buffer>  '.g:SemicolonMagicNormalMap. ' :call SemicolonMagic()<CR>'
+      execute 'vnoremap <buffer>  '.g:SemicolonMagicNormalMap. ' :call SemicolonMagic()<CR>'
     else
-    execute 'nnoremap <buffer> <silent> '.g:SemicolonMagicNormalMap. ' <ESC>:silent! call SemicolonMagic()<CR>'
+      execute 'nnoremap <buffer> <silent> '.g:SemicolonMagicNormalMap. ' :silent! call SemicolonMagic()<CR>'
+      execute 'vnoremap <buffer> <silent> '.g:SemicolonMagicNormalMap. ' :call SemicolonMagic()<CR>'
     endif
   endif
 
